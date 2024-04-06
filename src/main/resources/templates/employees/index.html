@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Employee Management System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+        /* Custom styles for dark theme */
+        body {
+            background-color: #121212; /* Dark background color */
+            color: #ffffff; /* Light text color */
+        }
+        .container {
+            background-color: #1f1f1f; /* Dark background color for container */
+            border-radius: 15px; /* Rounded corners */
+            padding: 20px;
+            margin-top: 50px; /* Adjust as needed */
+        }
+        .btn-primary {
+            background-color: #2962ff !important; /* Custom primary button color */
+            border-color: #2962ff !important;
+        }
+        .btn-primary:hover {
+            background-color: #0039cb !important; /* Custom primary button hover color */
+            border-color: #0039cb !important;
+        }
+        th,
+        td {
+            color: #ffffff; /* Light text color for table headers and data */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 class="text-center my-4">Employees</h1>
+
+    <a class="btn btn-primary" href="/employees/create">Add Employee</a>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Designation</th>
+                <th>Job Role</th>
+                <th>Salary</th>
+                <th>Created At</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Displaying using Thymeleaf -->
+            <tr th:each="employee : ${employees}">
+                <td th:text="${employee.id}"></td>
+                <td th:text="${employee.name}"></td>
+                <td th:text="${employee.designation}"></td>
+                <td th:text="${employee.job_role}"></td>
+                <td th:text="${employee.salary}"></td>
+                <td th:text="${employee.created_at.toString().substring(0,10)}"></td>
+                <td style="white-space:nowrap">
+                    <a class="btn btn-primary btn-sm" th:href="@{/employees/edit(id=${employee.id})}">Edit</a>
+                    <a class="btn btn-danger btn-sm" th:href="@{/employees/delete(id=${employee.id})}" onclick="return confirm('Are you sure?')">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>

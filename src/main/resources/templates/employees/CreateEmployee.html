@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Employee Managment System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+        /* Custom styles for dark theme */
+        body {
+            background-color: #121212; /* Dark background color */
+            color: #ffffff; /* Light text color */
+        }
+        .container {
+            background-color: #1f1f1f; /* Dark background color for container */
+            border-radius: 15px; /* Rounded corners */
+            padding: 20px;
+            margin-top: 50px; /* Adjust as needed */
+        }
+        .form-control {
+            background-color: #333333; /* Dark background color for form controls */
+            color: #ffffff; /* Light text color for form controls */
+        }
+        .btn-primary {
+            background-color: #2962ff !important; /* Custom primary button color */
+            border-color: #2962ff !important;
+        }
+        .btn-primary:hover {
+            background-color: #0039cb !important; /* Custom primary button hover color */
+            border-color: #0039cb !important;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 mx-auto rounded-border p-4 m-4">
+            <h2 class="text-center mb-5">New Employee</h2>
+
+            <form method="post" th:object="${employeeDto}">
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label">Name</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" th:field="${employeeDto.name}">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label">Designation</label>
+                    <div class="col-sm-8">
+                        <select class="form-select" th:field="${employeeDto.designation}">
+                            <option value="l1">l1</option>
+                            <option value="l2">l2</option>
+                            <option value="l3">l3</option>
+                        </select>
+                        <p th:if="${#fields.hasErrors('designation')}" th:errorclass="text-danger" th:errors="${employeeDto.designation}"></p>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label">Job Role</label>
+                    <div class="col-sm-8">
+                        <select class="form-select" th:field="${employeeDto.job_role}">
+                            <option value="Engineer">Engineer</option>
+                            <option value="Analyst">Analyst</option>
+                            <option value="Manager">Manager</option>
+                            <option value="Specialist">Specialist</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label">Salary</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" type="number" step="0.01" min="0" th:field="${employeeDto.salary}">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label">Description</label>
+                    <div class="col-sm-8">
+                        <textarea class="form-control" th:field="${employeeDto.description}"></textarea>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="offset-sm-4 col-sm-4 d-grid">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                    <div class="col-sm-4 d-grid">
+                        <a class="btn btn-outline-primary" href="/employees" role="button">Cancel</a>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>
